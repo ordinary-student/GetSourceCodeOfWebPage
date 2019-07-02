@@ -128,9 +128,11 @@ public class MultiThreadDownloader
 		}
 
 		// 合并文件
-		mergeFile(blockNum, fileName);
+		mergeFiles(blockNum, fileName);
 		// 合并完成
 		outputTextArea.append("合并完成！\r\n");
+		// 删除临时文件
+		// tempDir.delete();
 
 		// 计算用时
 		long end_time = new Date().getTime();
@@ -139,9 +141,9 @@ public class MultiThreadDownloader
 		long second = seconds % 60;
 
 		// 下载完成
-		outputTextArea.append("下载完成！用时：" + minutes + "分" + second + "秒\r\n");
+		outputTextArea.append("用时：" + minutes + "分" + second + "秒\r\n");
+		outputTextArea.append("[---下载完成！ " + getCurrentTime() + "---]\r\n");
 		outputTextArea.append("\r\n");
-
 	}
 
 	/**
@@ -150,26 +152,33 @@ public class MultiThreadDownloader
 	 * @param blockNum
 	 * @param fileName
 	 */
-	public void mergeFile(int blockNum, String fileName)
+	public void mergeFiles(int blockNum, String fileName)
 	{
 		try
 		{
 			// 输出合并文件信息
 			outputTextArea.append("正在合并文件...\r\n");
+
 			// 定义文件输出流
-			FileOutputStream fos = new FileOutputStream(tempDir + fileName);
+			FileOutputStream fos = new FileOutputStream(downloadDir.getAbsolutePath() + "/" + fileName);
+
 			// 遍历读分块文件
 			for (int i = 0; i < blockNum; i++)
 			{
-				// 读分块文件
-				FileInputStream fis = new FileInputStream(tempDir + "temp/" + fileName + "_" + (i + 1));
+				// 文件读取流
+				FileInputStream fis = new FileInputStream(tempDir.getAbsolutePath() + "/" + fileName + "_" + (i + 1));
+
 				// 缓冲区
 				byte[] buffer = new byte[1024];
-				int count;
-				while ((count = fis.read(buffer)) > 0)
+
+				// 读取到的内容
+				int content;
+
+				// 读取
+				while ((content = fis.read(buffer)) > 0)
 				{
 					// 写入一个文件
-					fos.write(buffer, 0, count);
+					fos.write(buffer, 0, content);
 				}
 
 				// 关闭流
@@ -181,7 +190,10 @@ public class MultiThreadDownloader
 
 		} catch (Exception e)
 		{
-			JOptionPane.showMessageDialog(outputTextArea, "合并文件出错！");
+			e.printStackTrace();
+			// 输出信息
+			outputTextArea.append("合并文件出错！\r\n");
+			JOptionPane.showMessageDialog(outputTextArea, "合并文件出错！", "错误", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 	}
