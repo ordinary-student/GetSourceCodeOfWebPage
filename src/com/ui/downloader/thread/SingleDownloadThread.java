@@ -91,28 +91,28 @@ public class SingleDownloadThread extends Thread
 			// 缓冲大小
 			byte[] buffer = new byte[1024];
 
-			// 读写数量
-			int count;
+			// 读取到的内容
+			int content;
 			// 定义当前下载进度
 			int process = beginPoint;
 			// 当进度未到达结束字节数时，继续
 			while (process < endPoint)
 			{
 				// 读取数据
-				count = in.read(buffer);
+				content = in.read(buffer);
 				// 判断是否读到最后一块
-				if (process + count >= endPoint)
+				if (process + content >= endPoint)
 				{
-					count = endPoint - process;
+					content = endPoint - process;
 					process = endPoint;
 				} else
 				{
 					// 计算当前进度
-					process = process + count;
+					process = process + content;
 				}
 
 				// 保存文件流
-				fos.write(buffer, 0, count);
+				fos.write(buffer, 0, content);
 
 			}
 
