@@ -95,16 +95,19 @@ public class SingleDownloadThread extends Thread
 			int content;
 			// 定义当前下载进度
 			int process = beginPoint;
+
 			// 当进度未到达结束字节数时，继续
 			while (process < endPoint)
 			{
 				// 读取数据
 				content = in.read(buffer);
+
 				// 判断是否读到最后一块
 				if (process + content >= endPoint)
 				{
 					content = endPoint - process;
 					process = endPoint;
+
 				} else
 				{
 					// 计算当前进度
