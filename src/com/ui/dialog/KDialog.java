@@ -46,12 +46,12 @@ public class KDialog extends JDialog
 	/*
 	 * 带参构造方法
 	 */
-	public KDialog(Component owner, String title)
+	public KDialog(Component parent, String title)
 	{
 		// 设置默认大小
 		setSize(340, 250);
 		// 设置位置
-		setLocationRelativeTo(owner);
+		setLocationRelativeTo(parent);
 		// 禁用窗体装饰，不显示标题栏，关闭，最小化等
 		setUndecorated(true);
 		// 大小不可变
@@ -62,7 +62,7 @@ public class KDialog extends JDialog
 		Border lineBorder = BorderFactory.createLineBorder(new Color(0, 128, 0));
 		// 设置标题边界
 		((JComponent) getContentPane()).setBorder(BorderFactory.createTitledBorder(lineBorder, title,
-				TitledBorder.CENTER, TitledBorder.TOP, new Font("微软雅黑", Font.PLAIN, 14), new Color(0, 128, 0)));
+				TitledBorder.CENTER, TitledBorder.TOP, new Font("楷体", Font.PLAIN, 18), new Color(0, 128, 0)));
 		// 设置绝对布局
 		getContentPane().setLayout(null);
 		// 设置透明度
