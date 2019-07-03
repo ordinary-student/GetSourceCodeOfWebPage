@@ -136,6 +136,7 @@ public class DownloaderDialog extends KDialog
 		outputMess_textArea = new JTextArea();
 		outputMess_textArea.setBackground(new Color(218, 224, 241));
 		outputMess_textArea.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+		outputMess_textArea.setEditable(false);
 
 		JScrollPane outputScrollPane = new JScrollPane(outputMess_textArea);
 		outputScrollPane.setBounds(10, 250, 580, 290);
