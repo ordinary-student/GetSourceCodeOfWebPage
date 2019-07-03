@@ -31,6 +31,7 @@ public class SetFilterDialog extends KDialog
 	private JCheckBox video_CheckBox;
 	private JCheckBox picture_CheckBox;
 	private JCheckBox html_CheckBox;
+	private JCheckBox css_CheckBox;
 	private JCheckBox other_CheckBox;
 	private JButton apply_Btn;
 	private JButton exit_Btn;
@@ -66,14 +67,14 @@ public class SetFilterDialog extends KDialog
 	private void initUI()
 	{
 		// 设置大小
-		setSize(340, 250);
+		setSize(350, 330);
 
 		// 定义按钮组
 		ButtonGroup buttonGroup = new ButtonGroup();
 
 		// 默认
 		default_RadioButton = new JRadioButton("默认(源代码输出)", true);
-		default_RadioButton.setBounds(40, 26, 150, 23);
+		default_RadioButton.setBounds(40, 30, 200, 30);
 		default_RadioButton.setFont(new Font("楷体", Font.PLAIN, 18));
 		default_RadioButton.setBackground(new Color(218, 224, 241));
 		default_RadioButton.addActionListener(this);
@@ -81,7 +82,7 @@ public class SetFilterDialog extends KDialog
 
 		// 所有链接
 		allLink_RadioButton = new JRadioButton("所有链接");
-		allLink_RadioButton.setBounds(40, 50, 150, 23);
+		allLink_RadioButton.setBounds(40, 70, 200, 30);
 		allLink_RadioButton.setFont(new Font("楷体", Font.PLAIN, 18));
 		allLink_RadioButton.setBackground(new Color(218, 224, 241));
 		allLink_RadioButton.addActionListener(this);
@@ -89,7 +90,7 @@ public class SetFilterDialog extends KDialog
 
 		// 自定义
 		custom_RadioButton = new JRadioButton("自定义筛选条件");
-		custom_RadioButton.setBounds(40, 74, 150, 23);
+		custom_RadioButton.setBounds(40, 110, 200, 30);
 		custom_RadioButton.setFont(new Font("楷体", Font.PLAIN, 18));
 		custom_RadioButton.setBackground(new Color(218, 224, 241));
 		custom_RadioButton.addActionListener(this);
@@ -102,7 +103,7 @@ public class SetFilterDialog extends KDialog
 
 		// 音频
 		audio_CheckBox = new JCheckBox("音频");
-		audio_CheckBox.setBounds(60, 98, 100, 23);
+		audio_CheckBox.setBounds(60, 150, 100, 30);
 		audio_CheckBox.setFont(new Font("楷体", Font.PLAIN, 18));
 		audio_CheckBox.setBackground(new Color(218, 224, 241));
 		audio_CheckBox.setFocusPainted(false);
@@ -111,7 +112,7 @@ public class SetFilterDialog extends KDialog
 
 		// 视频
 		video_CheckBox = new JCheckBox("视频");
-		video_CheckBox.setBounds(60, 122, 100, 23);
+		video_CheckBox.setBounds(170, 150, 100, 30);
 		video_CheckBox.setFont(new Font("楷体", Font.PLAIN, 18));
 		video_CheckBox.setBackground(new Color(218, 224, 241));
 		video_CheckBox.setFocusPainted(false);
@@ -120,7 +121,7 @@ public class SetFilterDialog extends KDialog
 
 		// 图片
 		picture_CheckBox = new JCheckBox("图片");
-		picture_CheckBox.setBounds(60, 146, 100, 23);
+		picture_CheckBox.setBounds(60, 190, 100, 30);
 		picture_CheckBox.setFont(new Font("楷体", Font.PLAIN, 18));
 		picture_CheckBox.setBackground(new Color(218, 224, 241));
 		picture_CheckBox.setFocusPainted(false);
@@ -129,16 +130,25 @@ public class SetFilterDialog extends KDialog
 
 		// 网页
 		html_CheckBox = new JCheckBox("网页");
-		html_CheckBox.setBounds(60, 170, 100, 23);
+		html_CheckBox.setBounds(170, 190, 100, 30);
 		html_CheckBox.setFont(new Font("楷体", Font.PLAIN, 18));
 		html_CheckBox.setBackground(new Color(218, 224, 241));
 		html_CheckBox.setFocusPainted(false);
 		html_CheckBox.setVisible(false);
 		getContentPane().add(html_CheckBox);
 
+		// css和js
+		css_CheckBox = new JCheckBox("css、js");
+		css_CheckBox.setBounds(60, 230, 100, 30);
+		css_CheckBox.setFont(new Font("楷体", Font.PLAIN, 18));
+		css_CheckBox.setBackground(new Color(218, 224, 241));
+		css_CheckBox.setFocusPainted(false);
+		css_CheckBox.setVisible(false);
+		getContentPane().add(css_CheckBox);
+
 		// 其它
 		other_CheckBox = new JCheckBox("其它链接");
-		other_CheckBox.setBounds(162, 171, 100, 23);
+		other_CheckBox.setBounds(170, 230, 100, 30);
 		other_CheckBox.setFont(new Font("楷体", Font.PLAIN, 18));
 		other_CheckBox.setBackground(new Color(218, 224, 241));
 		other_CheckBox.setFocusPainted(false);
@@ -147,14 +157,14 @@ public class SetFilterDialog extends KDialog
 
 		// 应用按钮
 		apply_Btn = new KButton("应用");
-		apply_Btn.setBounds(50, 210, 100, 30);
+		apply_Btn.setBounds(50, 280, 100, 30);
 
 		apply_Btn.addActionListener(this);
 		getContentPane().add(apply_Btn);
 
 		// 关闭按钮
 		exit_Btn = new KButton("关闭");
-		exit_Btn.setBounds(200, 210, 100, 30);
+		exit_Btn.setBounds(200, 280, 100, 30);
 		exit_Btn.addActionListener(this);
 		getContentPane().add(exit_Btn);
 
@@ -265,6 +275,7 @@ public class SetFilterDialog extends KDialog
 		video_CheckBox.setVisible(visible);
 		picture_CheckBox.setVisible(visible);
 		html_CheckBox.setVisible(visible);
+		css_CheckBox.setVisible(visible);
 		other_CheckBox.setVisible(visible);
 	}
 }
