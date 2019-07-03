@@ -1,11 +1,17 @@
 package com.utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import com.url.model.ParserModel;
 
 /**
  * 解析网页源代码工具类
@@ -77,4 +83,109 @@ public class DocumentUtil
 		// 返回document对象
 		return document;
 	}
+
+	/**
+	 * 根据链接和解析模式，返回解析结果
+	 * 
+	 * @param url
+	 * @param parserModel
+	 * @return
+	 */
+	public static List<String> parser(String url, ParserModel parserModel)
+	{
+		// 获取文档对象
+		Document document = getDocument(url);
+		// 创建集合
+		List<String> list = new ArrayList<String>();
+
+		// 判断解析模式
+		if (parserModel.getModel() == ParserModel.DEFAULT_MODEL)
+		{
+			// 默认模式
+			list.add(document.toString());
+
+		} else if (parserModel.getModel() == ParserModel.ALL_MODEL)
+		{
+			// 获取所有链接
+			list = getAllUrls(document);
+		} else
+		{
+			// 筛选符合的链接
+			list = ParserModelUtil.filter(getAllUrls(document), parserModel);
+		}
+
+		// 返回
+		return list;
+	}
+
+	/**
+	 * 获取所有链接
+	 * 
+	 * @param document
+	 * @return
+	 */
+	private static List<String> getAllUrls(Document document)
+	{
+		// 获取src链接
+		List<String> srcList = getSrcUrls(document);
+		// 获取href链接
+		List<String> hrefList = getHrefUrls(document);
+		// 遍历添加
+		for (String url : hrefList)
+		{
+			srcList.add(url);
+		}
+
+		// 返回
+		return srcList;
+	}
+
+	/**
+	 * 获取href链接
+	 * 
+	 * @param document
+	 * @return
+	 */
+	private static List<String> getHrefUrls(Document document)
+	{
+		// 创建集合
+		List<String> list = new ArrayList<String>();
+		// 获取元素
+		Elements elements = document.select("[href]");
+		// 遍历
+		for (Element element : elements)
+		{
+			// 获取单条链接
+			String href = element.attr("abs:href");
+			list.add(href);
+		}
+
+		// 返回
+		return list;
+	}
+
+	/**
+	 * 获取src链接
+	 * 
+	 * @param document
+	 * @return
+	 */
+	private static List<String> getSrcUrls(Document document)
+	{
+		// 创建集合
+		List<String> list = new ArrayList<String>();
+		// 获取元素
+		Elements elements = document.select("[src]");
+		// 遍历
+		for (Element element : elements)
+		{
+			// 获取单条链接
+			String src = element.attr("abs:src");
+			list.add(src);
+		}
+
+		// 返回
+		return list;
+	}
+
 }

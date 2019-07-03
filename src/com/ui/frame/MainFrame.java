@@ -38,16 +38,15 @@ import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import org.jsoup.nodes.Document;
-
 import com.ui.button.KButton;
 import com.ui.dialog.AboutDialog;
 import com.ui.dialog.DownloaderDialog;
 import com.ui.dialog.LoggerDialog;
 import com.ui.dialog.SetAgentDialog;
 import com.ui.dialog.SetFilterDialog;
-import com.urllog.CachedUrlList;
-import com.urllog.UrlLog;
+import com.url.list.CachedUrlList;
+import com.url.log.UrlLog;
+import com.url.model.ParserModel;
 import com.utils.DocumentUtil;
 import com.utils.FileUtil;
 import com.utils.WindowUtil;
@@ -96,7 +95,7 @@ public class MainFrame extends KFrame
 	private SystemTray systemTray;
 
 	// 解析模式
-	public static int parserModel = 00000;
+	public static ParserModel parserModel = new ParserModel(ParserModel.DEFAULT_MODEL);
 	// 解析记录集合
 	public static List<UrlLog> urlLogList;
 	// 缓存的网址集合
@@ -387,7 +386,7 @@ public class MainFrame extends KFrame
 		} else if ((ae.getSource() == start_Btn) || (ae.getSource() == start_MenuItem))
 		{
 			// 开始解析
-			// getSourceCode();
+			getSourceCode();
 
 		} else if (ae.getSource() == downloader_MenuItem)
 		{
@@ -457,29 +456,18 @@ public class MainFrame extends KFrame
 			// 缓存记录
 			cachedUrlList.add(url);
 
-			// 获取解析工具
-			// 获取Document对象
-			Document document = DocumentUtil.getDocument(url);
-			// 判断解析模式
-			if (parserModel == 0)// 默认
+			// 根据解析模式去解析
+			List<String> list = DocumentUtil.parser(url, parserModel);
+
+			// 清空输出区
+			output_TextArea.setText("");
+
+			// 遍历
+			for (String result : list)
 			{
 				// 输出
-				output_TextArea.setText(document.toString());
-
-			} else if (parserModel == 11111)// 全不勾
-			{
-				output_TextArea.setText("");
-			} else
-			{
-				output_TextArea.setText("");
-				// 根据解析模式去解析
-				// List<String> list = getDocument.parser(document, parserModel);
-				// for (String result : list)
-				// {
-				// // 输出
-				// output_TextArea.append(result);
-				// output_TextArea.append("\r\n");
-				// }
+				output_TextArea.append(result);
+				output_TextArea.append("\r\n");
 			}
 
 			// 记录日志

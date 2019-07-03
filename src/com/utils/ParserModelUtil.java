@@ -1,5 +1,11 @@
 package com.utils;
 
+import java.util.Iterator;
+import java.util.List;
+
+import com.url.category.Category;
+import com.url.model.ParserModel;
+
 /**
  * 解析模式工具类
  * 
@@ -8,21 +14,11 @@ package com.utils;
  */
 public class ParserModelUtil
 {
-	// 音频
-	private static final String[] AUDIO = { ".mp3", ".wav", ".midi" };
-	// 视频
-	private static final String[] VIDEO = { ".mp4", ".flv", ".rmvb", ".avi", ".wmv" };
-	// 图片
-	private static final String[] PICTURE = { ".bmp", ".png", ".jpg", ".jpeg", ".gif", ".tif", ".svg" };
-	// 网页
-	private static final String[] HTML = { ".html", ".htm", ".shtml" };
-	// css和js
-	private static final String[] CSS = { ".css", ".js" };
 
 	/*
 	 * 方法：判断字符串是否属于指定类别
 	 */
-	public static boolean belongsTo(String string, String... categories)
+	public static boolean belongsTo(String string, String[] categories)
 	{
 		boolean result = false;
 		// 遍历
@@ -32,33 +28,38 @@ public class ParserModelUtil
 			switch (category)
 				{
 				// 音频
-				case "audio":
+				case Category.AUDIO:
 					{
-						result = endsWith(string, AUDIO);
+						result = endsWith(string, Category.AUDIOS);
 					}
 					break;
 				// 视频
-				case "video":
+				case Category.VIDEO:
 					{
-						result = endsWith(string, VIDEO);
+						result = endsWith(string, Category.VIDEOS);
 					}
 					break;
 				// 图片
-				case "picture":
+				case Category.PICTURE:
 					{
-						result = endsWith(string, PICTURE);
+						result = endsWith(string, Category.PICTURES);
 					}
 					break;
 				// 网页
-				case "html":
+				case Category.HTML:
 					{
-						result = endsWith(string, HTML);
+						result = endsWith(string, Category.HTMLS);
 					}
 					break;
 				// css&js
-				case "css":
+				case Category.CSS:
 					{
-						result = endsWith(string, CSS);
+						result = endsWith(string, Category.CSSES);
+					}
+					break;
+				case Category.OTHER:
+					{
+						result = true;
 					}
 					break;
 				default:
@@ -97,5 +98,43 @@ public class ParserModelUtil
 
 		// 返回结果
 		return result;
+	}
+
+	/**
+	 * 根据模式筛选符合的链接
+	 * 
+	 * @param list
+	 * @param parserModel
+	 * @return
+	 */
+	public static List<String> filter(List<String> list, ParserModel parserModel)
+	{
+		return filter(list, parserModel.getCategories());
+	}
+
+	/**
+	 * 筛选符合类别的链接
+	 * 
+	 * @param list
+	 * @param categories
+	 * @return
+	 */
+	public static List<String> filter(List<String> list, String[] categories)
+	{
+		// 迭代器
+		Iterator<String> iterator = list.iterator();
+		// 判断筛选
+		while (iterator.hasNext())
+		{
+			String url = iterator.next();
+			// 不属于就移除
+			if (!belongsTo(url, categories))
+			{
+				iterator.remove();
+			}
+		}
+
+		// 返回筛选后的集合
+		return list;
 	}
 }

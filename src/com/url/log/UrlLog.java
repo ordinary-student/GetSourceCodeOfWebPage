@@ -1,4 +1,4 @@
-package com.urllog;
+package com.url.log;
 
 /**
  * 网址解析日志记录类

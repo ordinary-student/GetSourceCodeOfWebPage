@@ -13,6 +13,7 @@ import javax.swing.JRadioButton;
 
 import com.ui.button.KButton;
 import com.ui.frame.MainFrame;
+import com.url.model.ParserModel;
 
 /**
  * 设置筛选条件窗口类
@@ -211,10 +212,12 @@ public class SetFilterDialog extends KDialog
 		// 应用
 		if (default_RadioButton.isSelected())
 		{
-			MainFrame.parserModel = 0;
+			MainFrame.parserModel = new ParserModel(ParserModel.DEFAULT_MODEL);
+
 		} else if (allLink_RadioButton.isSelected())
 		{
-			MainFrame.parserModel = 1;
+			MainFrame.parserModel = new ParserModel(ParserModel.ALL_MODEL);
+
 		} else if (custom_RadioButton.isSelected())
 		{
 			// 获取解析模式
@@ -229,41 +232,14 @@ public class SetFilterDialog extends KDialog
 	/*
 	 * 获取解析模式
 	 */
-	private int getParserModel()
+	private ParserModel getParserModel()
 	{
-		//
-		int[] model = { 1, 1, 1, 1, 1 };
-		// 判断
-		if (audio_CheckBox.isSelected())
-		{
-			model[0] = 2;
-		}
-		if (video_CheckBox.isSelected())
-		{
-			model[1] = 2;
-		}
-		if (picture_CheckBox.isSelected())
-		{
-			model[2] = 2;
-		}
-		if (html_CheckBox.isSelected())
-		{
-			model[3] = 2;
-		}
-		if (other_CheckBox.isSelected())
-		{
-			model[4] = 2;
-		}
-
-		String model_str = "";
-		for (int i = 0; i < model.length; i++)
-		{
-			model_str = model_str + model[i];
-		}
+		// 获取值
+		boolean[] values = { audio_CheckBox.isSelected(), video_CheckBox.isSelected(), picture_CheckBox.isSelected(),
+				html_CheckBox.isSelected(), css_CheckBox.isSelected(), other_CheckBox.isSelected() };
 
 		// 返回
-		return Integer.parseInt(model_str);
-
+		return new ParserModel(values);
 	}
 
 	/*

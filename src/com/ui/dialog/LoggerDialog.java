@@ -16,7 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import com.ui.button.KButton;
-import com.urllog.UrlLog;
+import com.url.log.UrlLog;
 import com.utils.FileUtil;
 
 /**

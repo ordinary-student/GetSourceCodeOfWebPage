@@ -1,4 +1,4 @@
-package com.urllog;
+package com.url.list;
 
 import java.util.ArrayList;
 import java.util.List;
