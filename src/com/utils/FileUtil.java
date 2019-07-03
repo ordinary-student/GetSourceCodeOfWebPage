@@ -1,5 +1,6 @@
 package com.utils;
 
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,7 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * 读写文件工具类
@@ -127,5 +130,50 @@ public class FileUtil
 			JOptionPane.showMessageDialog(null, "写入文件失败！", "错误", JOptionPane.ERROR_MESSAGE);
 		}
 
+	}
+
+	/**
+	 * 保存内容入选择的文件
+	 * 
+	 * @param parent
+	 * @param content
+	 */
+	public static void save(Component parent, String content)
+	{
+		// 弹出文件选择框
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("保存文件");
+		fileChooser.setApproveButtonText("保存");
+
+		// 后缀名过滤器
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("网页文件(*.html)", "html");
+		fileChooser.setFileFilter(filter);
+
+		// 选择结果
+		int result = fileChooser.showSaveDialog(parent);
+		// 判断
+		if (result == JFileChooser.APPROVE_OPTION)
+		{
+			// 获取选择的文件夹
+			File selectedFile = fileChooser.getSelectedFile();
+			// 从文件名输入框中获取文件名
+			String fname = fileChooser.getName(selectedFile);
+
+			// 假如用户填写的文件名不带指定的后缀名，那么给它添上后缀
+			if (fname.indexOf(".html") == -1)
+			{
+				selectedFile = new File(fileChooser.getCurrentDirectory(), fname + ".html");
+			}
+
+			// 将内容写入文件
+			write(selectedFile, content);
+
+			// 保存完成
+			JOptionPane.showMessageDialog(parent, "保存成功！");
+
+		} else
+		{
+			return;
+		}
 	}
 }
