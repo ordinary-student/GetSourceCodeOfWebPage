@@ -465,6 +465,7 @@ public class MainFrame extends KFrame
 			{
 				// 输出
 				output_TextArea.setText(document.toString());
+
 			} else if (parserModel == 11111)// 全不勾
 			{
 				output_TextArea.setText("");
