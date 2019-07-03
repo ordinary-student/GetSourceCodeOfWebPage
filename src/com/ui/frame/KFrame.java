@@ -1,5 +1,8 @@
 package com.ui.frame;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,7 +13,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 
 /**
  * 自定义窗口类
@@ -28,9 +33,26 @@ public class KFrame extends JFrame
 	 */
 	public KFrame()
 	{
-		// 添加监听
-		addWindowListener(this);
+	}
 
+	/*
+	 * 设置菜单项外观
+	 */
+	public void setAppearance(JMenuItem jMenuItem, String iconName)
+	{
+		// 背景颜色
+		jMenuItem.setBackground(new Color(218, 224, 241));
+		// 字体
+		jMenuItem.setFont(new Font("楷体", Font.PLAIN, 18));
+		// 光标
+		jMenuItem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		// 焦点框
+		jMenuItem.setFocusPainted(false);
+		// 图标
+		if (!iconName.equals(""))
+		{
+			jMenuItem.setIcon(new ImageIcon(KFrame.class.getResource("/res/" + iconName)));
+		}
 	}
 
 	@Override
