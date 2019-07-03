@@ -66,7 +66,7 @@ public class KDialog extends JDialog
 		// 设置绝对布局
 		getContentPane().setLayout(null);
 		// 设置透明度
-		setOpacity(0.9f);
+		setOpacity(0.95f);
 		// 设置关闭
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		// 设置不可视
