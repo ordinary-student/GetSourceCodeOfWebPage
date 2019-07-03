@@ -16,11 +16,11 @@ import org.jsoup.nodes.Document;
 public class DocumentUtil
 {
 	// 代理头
-	private static String os = "5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)";
-	private static String chrome = "70.0.3538.25";
-	private static String safari = "537.36";
-	private static String core = "1.70.3695.400";
-	private static String qqbrowser = "10.4.3562.400";
+	public static String os = "5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)";
+	public static String chrome = "70.0.3538.25";
+	public static String safari = "537.36";
+	public static String core = "1.70.3695.400";
+	public static String qqbrowser = "10.4.3562.400";
 
 	/*
 	 * 构造方法
