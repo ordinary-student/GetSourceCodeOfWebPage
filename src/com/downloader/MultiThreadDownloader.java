@@ -1,4 +1,4 @@
-package com.ui.downloader;
+package com.downloader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-import com.ui.downloader.thread.SingleDownloadThread;
+import com.downloader.thread.SingleDownloadThread;
 
 /**
  * 多线程下载类
