@@ -99,7 +99,7 @@ public class KButton extends JButton
 	private void paintcolor(Color COLOR1, Color COLOR2)
 	{
 		setMargin(new Insets(0, 0, 0, 0));
-		setFont(new Font("微软雅黑", Font.PLAIN, 16));
+		setFont(new Font("楷体", Font.PLAIN, 18));
 		setBorderPainted(false);
 		setForeground(Color.black);
 		setFocusPainted(false);
