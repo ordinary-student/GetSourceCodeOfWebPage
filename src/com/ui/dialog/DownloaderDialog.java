@@ -18,6 +18,7 @@ import javax.swing.border.TitledBorder;
 
 import com.downloader.MultiThreadDownloader;
 import com.ui.button.KButton;
+import com.utils.PropertiesUtil;
 
 /**
  * 下载器窗口类
@@ -57,9 +58,9 @@ public class DownloaderDialog extends KDialog
 		initUI();
 
 		// 文件存放目录
-		downloadDir = new File("E:/temp/download/");
+		downloadDir = new File(PropertiesUtil.downloadDir);
 		// 临时目录
-		tempDir = new File("E:/temp/download/temp/");
+		tempDir = new File(downloadDir, "temp/");
 
 		// 若下载目录不存在，则创建
 		if (!downloadDir.exists())

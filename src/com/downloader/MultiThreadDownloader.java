@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 import com.downloader.thread.SingleDownloadThread;
+import com.utils.PropertiesUtil;
 
 /**
  * 多线程下载类
@@ -85,7 +86,7 @@ public class MultiThreadDownloader
 
 		// 获取分块大小属性值
 		// TODO
-		int fileBlockSize = 1;
+		int fileBlockSize = PropertiesUtil.blockSize;
 		// 设置分块大小
 		int blockSize = fileBlockSize * 1024 * 1024;
 		// 文件分块的数量
@@ -98,7 +99,7 @@ public class MultiThreadDownloader
 
 		// 获取最大线程属性值
 		// TODO
-		int maxThreadNum = 20;
+		int maxThreadNum = PropertiesUtil.maxThreadNum;
 		// 判断
 		if (blockNum > maxThreadNum)
 		{
