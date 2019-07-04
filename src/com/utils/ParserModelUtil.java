@@ -61,7 +61,7 @@ public class ParserModelUtil
 						break;
 					case Category.OTHER:
 						{
-							result = true;
+							result = endsWith(string, Category.OTHERS);
 						}
 						break;
 					default:
