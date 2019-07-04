@@ -1,6 +1,7 @@
 package com.url.model;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import com.url.category.Category;
 
@@ -20,30 +21,34 @@ public class ParserModel
 	private int model = DEFAULT_MODEL;
 
 	// 集合
-	public HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+	private HashMap<String, Boolean> map;
 
 	/*
 	 * 构造方法
 	 */
 	public ParserModel()
 	{
-
+		this.model = DEFAULT_MODEL;
+		this.map = new HashMap<String, Boolean>();
 	}
 
 	public ParserModel(int model)
 	{
 		this.model = model;
+		this.map = new HashMap<String, Boolean>();
 	}
 
 	public ParserModel(String key, boolean value)
 	{
 		this.model = CUSTOM_MODEL;
+		this.map = new HashMap<String, Boolean>();
 		put(key, value);
 	}
 
 	public ParserModel(String[] keys, boolean[] values)
 	{
 		this.model = CUSTOM_MODEL;
+		this.map = new HashMap<String, Boolean>();
 		try
 		{
 			put(keys, values);
@@ -56,6 +61,7 @@ public class ParserModel
 	public ParserModel(boolean[] values)
 	{
 		this.model = CUSTOM_MODEL;
+		this.map = new HashMap<String, Boolean>();
 		try
 		{
 			put(Category.CATEGORY, values);
@@ -74,7 +80,7 @@ public class ParserModel
 	public void put(String key, boolean value)
 	{
 		// 添加键值对
-		map.put(key, value);
+		this.map.put(key, value);
 	}
 
 	/**
@@ -95,7 +101,7 @@ public class ParserModel
 				String key = keys[i];
 				boolean value = values[i];
 				// 添加键值对
-				map.put(key, value);
+				put(key, value);
 			}
 		} else
 		{
@@ -111,13 +117,13 @@ public class ParserModel
 	public String[] getCategories()
 	{
 		// 类别数组
-		String[] categories = new String[map.size()];
+		String[] categories = new String[this.map.size()];
 
 		int i = 0;
 		// 遍历
-		for (String key : map.keySet())
+		for (String key : this.map.keySet())
 		{
-			if (map.get(key))
+			if (this.map.get(key))
 			{
 				categories[i] = key;
 				i++;
@@ -126,6 +132,26 @@ public class ParserModel
 
 		// 返回
 		return categories;
+	}
+
+	/**
+	 * 获取所有值
+	 * 
+	 * @return
+	 */
+	public boolean[] getValues()
+	{
+		boolean[] values = new boolean[this.map.size()];
+		int i = 0;
+		// 遍历
+		for (Entry<String, Boolean> entry : this.map.entrySet())
+		{
+			values[i] = entry.getValue();
+			i++;
+		}
+
+		// 返回
+		return values;
 	}
 
 	/**

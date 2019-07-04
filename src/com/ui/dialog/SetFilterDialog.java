@@ -45,6 +45,8 @@ public class SetFilterDialog extends KDialog
 		super(parent, "设置筛选条件");
 		// 初始化面板
 		initUI();
+		// 初始化解析模式
+		initChoice();
 	}
 
 	/*
@@ -204,6 +206,29 @@ public class SetFilterDialog extends KDialog
 		}
 	}
 
+	/**
+	 * 初始化解析模式
+	 */
+	private void initChoice()
+	{
+
+		if (MainFrame.parserModel.getModel() == ParserModel.DEFAULT_MODEL)
+		{
+			default_RadioButton.doClick();
+
+		} else if (MainFrame.parserModel.getModel() == ParserModel.ALL_MODEL)
+		{
+			allLink_RadioButton.doClick();
+
+		} else if (MainFrame.parserModel.getModel() == ParserModel.CUSTOM_MODEL)
+		{
+			// 显示解析模式
+			showParserModel(MainFrame.parserModel);
+			custom_RadioButton.doClick();
+		}
+
+	}
+
 	/*
 	 * 应用
 	 */
@@ -240,6 +265,22 @@ public class SetFilterDialog extends KDialog
 
 		// 返回
 		return new ParserModel(values);
+	}
+
+	/*
+	 * 获取解析模式
+	 */
+	private void showParserModel(ParserModel parserModel)
+	{
+		// 获取值
+		boolean[] values = parserModel.getValues();
+		// 设置
+		audio_CheckBox.setSelected(values[0]);
+		video_CheckBox.setSelected(values[1]);
+		picture_CheckBox.setSelected(values[2]);
+		html_CheckBox.setSelected(values[3]);
+		css_CheckBox.setSelected(values[4]);
+		other_CheckBox.setSelected(values[5]);
 	}
 
 	/*

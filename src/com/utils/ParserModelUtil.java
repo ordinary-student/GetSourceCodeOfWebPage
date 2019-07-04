@@ -24,52 +24,55 @@ public class ParserModelUtil
 		// 遍历
 		for (String category : categories)
 		{
-			// 判断类别
-			switch (category)
+			if (category != null)
+			{
+				// 判断类别
+				switch (category)
+					{
+					// 音频
+					case Category.AUDIO:
+						{
+							result = endsWith(string, Category.AUDIOS);
+						}
+						break;
+					// 视频
+					case Category.VIDEO:
+						{
+							result = endsWith(string, Category.VIDEOS);
+						}
+						break;
+					// 图片
+					case Category.PICTURE:
+						{
+							result = endsWith(string, Category.PICTURES);
+						}
+						break;
+					// 网页
+					case Category.HTML:
+						{
+							result = endsWith(string, Category.HTMLS);
+						}
+						break;
+					// css&js
+					case Category.CSS:
+						{
+							result = endsWith(string, Category.CSSES);
+						}
+						break;
+					case Category.OTHER:
+						{
+							result = true;
+						}
+						break;
+					default:
+						break;
+					}
+
+				// 如果是属于,跳出循环
+				if (result)
 				{
-				// 音频
-				case Category.AUDIO:
-					{
-						result = endsWith(string, Category.AUDIOS);
-					}
-					break;
-				// 视频
-				case Category.VIDEO:
-					{
-						result = endsWith(string, Category.VIDEOS);
-					}
-					break;
-				// 图片
-				case Category.PICTURE:
-					{
-						result = endsWith(string, Category.PICTURES);
-					}
-					break;
-				// 网页
-				case Category.HTML:
-					{
-						result = endsWith(string, Category.HTMLS);
-					}
-					break;
-				// css&js
-				case Category.CSS:
-					{
-						result = endsWith(string, Category.CSSES);
-					}
-					break;
-				case Category.OTHER:
-					{
-						result = true;
-					}
-					break;
-				default:
 					break;
 				}
-
-			// 如果是属于,跳出循环
-			if (result)
-			{
-				break;
 			}
 		}
 		// 返回结果

@@ -74,7 +74,6 @@ public class MainFrame extends KFrame
 	private JMenuItem downloader_MenuItem;
 	private JMenuItem setAgent_MenuItem;
 	private JMenuItem setFilter_MenuItem;
-	private JMenuItem setProperties_MenuItem;
 	private JMenuItem changeSkin_MenuItem;
 	private JMenuItem record_MenuItem;
 	private JMenuItem about_MenuItem;
@@ -95,7 +94,7 @@ public class MainFrame extends KFrame
 	private SystemTray systemTray;
 
 	// 解析模式
-	public static ParserModel parserModel = new ParserModel(ParserModel.DEFAULT_MODEL);
+	public static ParserModel parserModel;
 	// 解析记录集合
 	public static List<UrlLog> urlLogList;
 	// 缓存的网址集合
@@ -112,6 +111,8 @@ public class MainFrame extends KFrame
 		super();
 		// 初始化面板
 		initUI();
+		// 解析模式
+		parserModel = new ParserModel(ParserModel.DEFAULT_MODEL);
 		// 解析记录集合
 		urlLogList = new ArrayList<UrlLog>();
 		// 缓存的网址集合
@@ -309,13 +310,6 @@ public class MainFrame extends KFrame
 		setFilter_MenuItem.addActionListener(this);
 		set_Menu.add(setFilter_MenuItem);
 
-		// 设置属性
-		setProperties_MenuItem = new JMenuItem("设置属性");
-		setAppearance(setProperties_MenuItem, "properties.png");
-		setProperties_MenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
-		setProperties_MenuItem.addActionListener(this);
-		set_Menu.add(setProperties_MenuItem);
-
 		// 分割线
 		set_Menu.addSeparator();
 
@@ -403,14 +397,10 @@ public class MainFrame extends KFrame
 			// 设置筛选条件
 			SetFilterDialog.getInstance(output_TextArea).setVisible(true);
 
-		} else if (ae.getSource() == setProperties_MenuItem)
-		{
-			// 设置属性
-			// new SetPropertiesDialog(output_TextArea).setVisible(true);
-
 		} else if (ae.getSource() == changeSkin_MenuItem)
 		{
 			// 更换皮肤
+			// TODO
 			// new ChangeSkinDialog(output_TextArea).setVisible(true);
 
 		} else if (ae.getSource() == record_MenuItem)
