@@ -74,7 +74,7 @@ public class DownloaderDialog extends KDialog
 		}
 
 		// 多线程下载器
-		multiThreadDownloader = new MultiThreadDownloader(outputTextArea, downloadDir, tempDir);
+		multiThreadDownloader = new MultiThreadDownloader(outputMess_textArea, downloadDir, tempDir);
 	}
 
 	/*
