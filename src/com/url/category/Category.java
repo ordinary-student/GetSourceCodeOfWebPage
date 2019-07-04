@@ -21,7 +21,7 @@ public class Category
 	public static final String HTML = "html";
 	// css和js
 	public static final String CSS = "css";
-	// css和js
+	// 其它
 	public static final String OTHER = "other";
 
 	// 音频
@@ -29,10 +29,12 @@ public class Category
 	// 视频
 	public static final String[] VIDEOS = { ".mp4", ".flv", ".rmvb", ".avi", ".wmv" };
 	// 图片
-	public static final String[] PICTURES = { ".bmp", ".png", ".jpg", ".jpeg", ".gif", ".tif", ".svg" };
+	public static final String[] PICTURES = { ".bmp", ".png", ".jpg", ".jpeg", ".gif", ".tif", ".svg", ".ico" };
 	// 网页
 	public static final String[] HTMLS = { ".html", ".htm", ".shtml" };
 	// css和js
 	public static final String[] CSSES = { ".css", ".js" };
+	// 其它
+	public static final String[] OTHERS = { ".txt", ".java", ".com", ".cn" };
 
 }
